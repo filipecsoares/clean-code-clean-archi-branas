@@ -38,8 +38,10 @@ test("Should create an order with three items and discount coupon", function () 
 test("Should not apply discount coupon expired", function () {
     const expirationDate = new Date('2020-01-01');
     const cpf = "839.435.452-10";
-    const order = new Order(cpf);
+    const order = new Order(cpf, new Date("2021-12-10"));
     order.addItem(new Item(1, "Music", "CD", 30), 3);
     order.addItem(new Item(2, "Video", "DVD", 50), 1);
-    expect(() => order.addCoupon(new Coupon("VALE20", 20, expirationDate))).toThrow(new Error("Coupon is expired"));
+	order.addCoupon(new Coupon("VALE20", 20, expirationDate))
+	const total = order.getTotal();
+	expect(total).toBe(140);
 });
