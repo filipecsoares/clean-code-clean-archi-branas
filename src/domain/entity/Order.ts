@@ -38,6 +38,7 @@ export default class Order {
 		if (this.coupon) {
 			total -= (total * this.coupon.percentage) / 100;
 		}
+		total += this.getFreight();
 		return total;
 	}
 }
