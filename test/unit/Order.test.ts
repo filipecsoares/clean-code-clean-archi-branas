@@ -55,7 +55,6 @@ test("Should create an order with three items with freight with default strategy
 	order.addItem(new Item(5, "Instruments", "Guitar Gibson Les Paul", 8000, 100, 30, 10, 3), 1);
 	order.addItem(new Item(6, "Clothes", "Shirt", 30, 70, 1, 1, 0.1), 2);
 	const freight = order.getFreight();
-	console.log(freight);
 	expect(freight).toBe(60);
 });
 
@@ -66,6 +65,13 @@ test("Should create an order with three items with freight with fixed strategy",
 	order.addItem(new Item(5, "Instruments", "Guitar Gibson Les Paul", 8000, 100, 30, 10, 3), 1);
 	order.addItem(new Item(6, "Clothes", "Shirt", 30, 70, 1, 1, 0.1), 2);
 	const freight = order.getFreight();
-	console.log(freight);
 	expect(freight).toBe(40);
+});
+
+test("Should create an order with a code generated", function () {
+	const cpf = "839.435.452-10";
+	const date = new Date("2021-12-10");
+	const order = new Order(cpf, date);
+	const code = order.code.value;
+	expect(code).toBe("202100000001");
 });
