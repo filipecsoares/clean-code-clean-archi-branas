@@ -1,5 +1,5 @@
 export default class OrderCode {
-    value: string;
+    readonly value: string;
 
     constructor(private date: Date, private sequence: number) {
         if(!date) throw new Error('Invalid date');

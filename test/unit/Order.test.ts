@@ -72,6 +72,6 @@ test("Should create an order with a code generated", function () {
 	const cpf = "839.435.452-10";
 	const date = new Date("2021-12-10");
 	const order = new Order(cpf, date);
-	const code = order.code.value;
+	const code = order.getCode();
 	expect(code).toBe("202100000001");
 });

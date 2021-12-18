@@ -11,29 +11,29 @@ export default class Order {
 	private orderItems: OrderItem[];
 	coupon: Coupon | undefined;
 	private freight: number;
-	code: OrderCode;
+	private code: OrderCode;
 
-	constructor (cpf: string, readonly date: Date = new Date(), readonly freightCalculator: FreightCalculator = new DefaultFreightCalculator(), readonly sequence: number = 1) {
+	constructor(cpf: string, readonly date: Date = new Date(), readonly freightCalculator: FreightCalculator = new DefaultFreightCalculator(), readonly sequence: number = 1) {
 		this.cpf = new Cpf(cpf);
 		this.orderItems = [];
 		this.freight = 0;
 		this.code = new OrderCode(this.date, this.sequence);
 	}
 
-	addItem (item: Item, quantity: number) {
+	addItem(item: Item, quantity: number) {
 		this.freight += this.freightCalculator.calculate(item) * quantity;
 		this.orderItems.push(new OrderItem(item.idItem, item.price, quantity));
 	}
 
-	addCoupon (coupon: Coupon) {
-        if(coupon.isValid(this.date)) this.coupon = coupon;
+	addCoupon(coupon: Coupon) {
+		if (coupon.isValid(this.date)) this.coupon = coupon;
 	}
 
-	getFreight () {
+	getFreight() {
 		return this.freight;
 	}
 
-	getTotal () {
+	getTotal() {
 		let total = 0;
 		for (const orderItem of this.orderItems) {
 			total += orderItem.getTotal();
@@ -43,5 +43,9 @@ export default class Order {
 		}
 		total += this.getFreight();
 		return total;
+	}
+
+	getCode() {
+		return this.code.value;
 	}
 }
