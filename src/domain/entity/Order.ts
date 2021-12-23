@@ -33,6 +33,14 @@ export default class Order {
 		return this.freight;
 	}
 
+	getCpf() {
+		return this.cpf.value;
+	}
+
+	getOrderItems() {
+		return this.orderItems;
+	}
+
 	getTotal() {
 		let total = 0;
 		for (const orderItem of this.orderItems) {
