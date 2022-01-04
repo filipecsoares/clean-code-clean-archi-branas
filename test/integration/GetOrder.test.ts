@@ -2,8 +2,7 @@ import GetOrder from '../../src/application/query/GetOrder';
 import PlaceOrder from '../../src/application/usecase/place_order/PlaceOrder';
 import OrderDAODatabase from '../../src/infra/dao/OrderDAODatabase';
 import PgPromiseConnectionAdapter from '../../src/infra/database/PgPromiseConnectionAdapter';
-import CouponRepositoryDatabase from '../../src/infra/repository/database/CouponRepositoryDatabase';
-import ItemRepositoryDatabase from '../../src/infra/repository/database/ItemRepositoryDatabase';
+import DatabaseRepositoryFactory from '../../src/infra/factory/DatabaseRepositoryFactory';
 import OrderRepositoryDatabase from '../../src/infra/repository/database/OrderRepositoryDatabase';
 
 let placeOrder: PlaceOrder;
@@ -12,11 +11,10 @@ let orderRepository: OrderRepositoryDatabase;
 
 beforeEach(function () {
     const connection = PgPromiseConnectionAdapter.getInstance();
-	const itemRepository = new ItemRepositoryDatabase(connection);
 	orderRepository = new OrderRepositoryDatabase(connection);
-	const couponRepository = new CouponRepositoryDatabase(connection);
 	const orderDAO = new OrderDAODatabase(connection);
-	placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
+	const repositoryFactory = new DatabaseRepositoryFactory();
+	placeOrder = new PlaceOrder(repositoryFactory);
 	getOrder = new GetOrder(orderDAO);
 });
 
