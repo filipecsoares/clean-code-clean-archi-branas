@@ -1,4 +1,4 @@
-import GetOrders from '../../src/application/query/GetOrders';
+import GetOrders from '../../src/application/query/get_orders/GetOrders';
 import PlaceOrder from '../../src/application/usecase/place_order/PlaceOrder';
 import PlaceOrderInput from '../../src/application/usecase/place_order/PlaceOrderInput';
 import OrderDAODatabase from '../../src/infra/dao/OrderDAODatabase';
@@ -41,7 +41,7 @@ test("Should get all orders", async function () {
 	);
 	await placeOrder.execute(input);
 	const getOrdersOutput = await getOrders.execute();
-    expect(getOrdersOutput.length).toBe(1);
+    expect(getOrdersOutput.orders).toHaveLength(1);
 });
 
 afterEach(async function () {

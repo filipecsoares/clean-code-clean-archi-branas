@@ -1,4 +1,4 @@
-import GetOrder from '../../src/application/query/GetOrder';
+import GetOrder from '../../src/application/query/get_order/GetOrder';
 import PlaceOrder from '../../src/application/usecase/place_order/PlaceOrder';
 import OrderDAODatabase from '../../src/infra/dao/OrderDAODatabase';
 import PgPromiseConnectionAdapter from '../../src/infra/database/PgPromiseConnectionAdapter';
@@ -30,7 +30,7 @@ test("Should get an order by code", async function () {
 	};
 	const placeOrderOutput = await placeOrder.execute(input);
 	const getOrderOutput = await getOrder.execute(placeOrderOutput.code);
-	expect(getOrderOutput.total).toBe(6350);
+	expect(getOrderOutput.total).toBe(138);
 });
 
 afterEach(async function () {
