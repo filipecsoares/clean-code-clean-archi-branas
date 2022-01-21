@@ -7,10 +7,12 @@ export default class OrderDAODatabase implements OrderDAO {
 	}
 
 	async get(code: string): Promise<any> {
-		return this.connection.query("select code, total::float from ccca.order where code = $1", [code]);
+		const order = await this.connection.query("select code, total::float from ccca.order where code = $1", [code]);
+		return order;
 	}
 
 	async findAll(): Promise<any> {
-		return this.connection.query("select code, total::float from ccca.order", []);
+		const orders = await this.connection.query("select code, total::float from ccca.order", []);
+		return orders;
 	}
 }

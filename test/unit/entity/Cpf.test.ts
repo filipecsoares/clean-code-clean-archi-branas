@@ -1,4 +1,4 @@
-import Cpf from '../../src/domain/entity/Cpf';
+import Cpf from '../../../src/domain/entity/Cpf';
 
 test("Should validate cpf", () => {
     // given
