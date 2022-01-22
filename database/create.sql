@@ -11,12 +11,12 @@ create table ccca.item (
 	weight integer
 );
 
-insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (1, 'Music', 'CD', 30, 30, 30, 10, 0.5);
-insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (2, 'Video', 'DVD', 50, 40, 20, 10, 0.5);
-insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (3, 'Video', 'VHS', 10, 40, 20, 10, 0.5);
-insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (4, 'Musical Instruments', 'Guitar', 1000, 100, 30, 10, 3);
-insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (5, 'Musical Instruments', 'Amplifier', 5000, 100, 50, 50, 20);
-insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (6, 'Accessories', 'Cable', 30, 10, 10, 10, 0.9);
+insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (1, 'Música', 'CD', 30, 30, 30, 10, 0.5);
+insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (2, 'Vídeo', 'DVD', 50, 40, 20, 10, 0.5);
+insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (3, 'Vídeo', 'VHS', 10, 40, 20, 10, 0.5);
+insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (4, 'Instrumentos Musicais', 'Guitarra', 1000, 100, 30, 10, 3);
+insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (5, 'Instrumentos Musicais', 'Amplificador', 5000, 100, 50, 50, 20);
+insert into ccca.item (id_item, category, description, price, width, height, length, weight) values (6, 'Acessórios', 'Cabo', 30, 10, 10, 10, 0.9);
 
 create table ccca.coupon (
 	code text,
@@ -35,8 +35,9 @@ create table ccca.order (
 	cpf text,
 	issue_date timestamp,
 	freight numeric,
+	total numeric,
 	sequence integer,
-	primary key (id_order)
+	primary key (id)
 );
 
 create table ccca.order_item (
@@ -45,4 +46,13 @@ create table ccca.order_item (
 	price numeric,
 	quantity integer,
 	primary key (id_order, id_item)
+);
+
+create table ccca.stock_entry (
+	id_stock_entry serial,
+	id_item integer,
+	operation text,
+	quantity integer,
+	date timestamp,
+	primary key (id_stock_entry)
 );
